@@ -21,6 +21,11 @@ Plug 'preservim/nerdtree'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'wincent/command-t'
+Plug 'mileszs/ack.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'mbbill/undotree'
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -33,11 +38,22 @@ set title
 set sts=2
 set ts=2
 set sw=2
+set hlsearch
+set undofile                 
+set undodir=$HOME/.vim/undo  "directory where the undo files will be stored
 " Smart way to move between windows
 map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => autoformat
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+noremap <F4> :Autoformat<CR>
+
+
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => vim-auto-save
@@ -89,5 +105,5 @@ execute "set <M-o>=\eo"
 map <M-o> :call CurtineIncSw()<CR>
 
 " run 
-autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
-autocmd FileType python imap <buffer> <F9> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+autocmd FileType python map <buffer> <F5> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+autocmd FileType python imap <buffer> <F5> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
