@@ -26,6 +26,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'mbbill/undotree'
+Plug 'preservim/nerdcommenter'
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -38,14 +39,24 @@ set title
 set sts=2
 set ts=2
 set sw=2
+" The width of a TAB is set to 2.
+" Still it is a \t. It is just that
+" Vim will interpret it to be having
+" a width of 2.
+set tabstop=2
+set shiftwidth=2    " Indents will have a width of 2
+set softtabstop=2   " Sets the number of columns for a TAB
+set expandtab       " Expand TABs to spaces
 set hlsearch
-set undofile                 
+set undofile
 set undodir=$HOME/.vim/undo  "directory where the undo files will be stored
 " Smart way to move between windows
 map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
+nmap <C-_>   <Plug>NERDCommenterToggle<CR>
+vmap <C-_>   <Plug>NERDCommenterToggle<CR>gv
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => autoformat
@@ -78,7 +89,7 @@ autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTr
 autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 " If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
 autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
-    \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
+			\ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
 
 
 
@@ -104,6 +115,6 @@ let g:ctrlp_map = '<c-p>'
 execute "set <M-o>=\eo"
 map <M-o> :call CurtineIncSw()<CR>
 
-" run 
+" run
 autocmd FileType python map <buffer> <F5> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 autocmd FileType python imap <buffer> <F5> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
