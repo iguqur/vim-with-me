@@ -5,7 +5,6 @@ Plug '907th/vim-auto-save'
 Plug 'vim-autoformat/vim-autoformat'
 Plug 'ericcurtin/CurtineIncSw.vim'
 Plug 'dense-analysis/ale'
-Plug 'morhetz/gruvbox'
 Plug 'taketwo/vim-ros'
 Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
@@ -27,6 +26,10 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'mbbill/undotree'
 Plug 'preservim/nerdcommenter'
+Plug 'skywind3000/asyncrun.vim'
+Plug 'morhetz/gruvbox'
+Plug 'dracula/vim'
+Plug 'mhinz/vim-startify'
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -115,9 +118,6 @@ let g:ctrlp_map = '<c-p>'
 execute "set <M-o>=\eo"
 map <M-o> :call CurtineIncSw()<CR>
 
-" run
-autocmd FileType python map <buffer> <F5> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
-autocmd FileType python imap <buffer> <F5> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 
 
 
@@ -129,3 +129,31 @@ autocmd FileType python imap <buffer> <F5> <esc>:w<CR>:exec '!python3' shellesca
 vnoremap <silent> <C-T> :<C-u>Ydv<CR>
 nnoremap <silent> <C-T> :<C-u>Ydc<CR>
 noremap <leader>yd :<C-u>Yde<CR>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => skywind3000/asyncrun.vim
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" automatically open quickfix window when AsyncRun command is executed
+" set the quickfix window 6 lines height.
+let g:asyncrun_open = 8
+
+" ring the bell to notify you job finished
+let g:asyncrun_bell = 1
+
+nnoremap <F12> :call asyncrun#quickfix_toggle(8)<cr>
+imap <F12> <esc>:call asyncrun#quickfix_toggle(8)<cr>
+
+" run
+autocmd FileType python map <buffer> <F5> :AsyncRun python3 %<CR>
+autocmd FileType python imap <buffer> <F5> <esc>:AsyncRun python3 %<CR>
+autocmd FileType cpp map <buffer> <F5> :AsyncRun (cd build && make -j7)<CR>
+autocmd FileType cpp imap <buffer> <F5> <esc>:AsyncRun (cd build && make -j7)<CR>
+
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => thema
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+colorscheme dracula
