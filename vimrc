@@ -33,6 +33,7 @@ Plug 'morhetz/gruvbox'
 Plug 'dracula/vim'
 Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-surround'
+Plug 'jiangmiao/auto-pairs'
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -61,6 +62,10 @@ nmap <leader>w :w!<cr>
 command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
 
 map <space> /
+
+" Ignore case when searching
+set ignorecase
+
 set number
 set relativenumber
 set title
@@ -127,6 +132,7 @@ let g:ycm_auto_hover = ''
 nmap <F1> <plug>(YCMHover)
 nnoremap <F7> :YcmCompleter GoToReferences<CR>
 nnoremap <F8> :YcmCompleter GoToDefinition<CR>
+nmap <F9> <Plug>(YCMFindSymbolInDocument)
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -232,3 +238,11 @@ noremap <silent><expr> /  incsearch#go(<SID>incsearch_config())
 noremap <silent><expr> ?  incsearch#go(<SID>incsearch_config({'command': '?'}))
 noremap <silent><expr> g/ incsearch#go(<SID>incsearch_config({'is_stay': 1}))
 
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => startify 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:startify_change_to_dir = 0
+let g:startify_change_to_vcs_root = 1
