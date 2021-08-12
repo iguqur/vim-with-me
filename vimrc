@@ -80,8 +80,24 @@ set tabstop=2
 set shiftwidth=2    " Indents will have a width of 2
 set softtabstop=2   " Sets the number of columns for a TAB
 set expandtab       " Expand TABs to spaces
+
 set undofile
 set undodir=$HOME/.vim/undo  "directory where the undo files will be stored
+set directory=$HOME/.vim/swapfiles//
+
+" Delete trailing white space on save, useful for some filetypes ;)
+fun! CleanExtraSpaces()
+    let save_cursor = getpos(".")
+    let old_query = getreg('/')
+    silent! %s/\s\+$//e
+    call setpos('.', save_cursor)
+    call setreg('/', old_query)
+endfun
+
+if has("autocmd")
+    autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee,*.bash,*.cc,*.cpp,*.h,*.hpp,*.md :call CleanExtraSpaces()
+endif
+
 " Smart way to move between windows
 map <C-j> <C-W>j
 map <C-k> <C-W>k
